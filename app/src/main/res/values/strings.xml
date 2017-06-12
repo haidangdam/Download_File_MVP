@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">My Application</string>
+  <string name="pause_button">Pause</string>
+  <string name="resume_button">Resume</string>
+</resources>
