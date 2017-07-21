@@ -10,30 +10,47 @@ import java.util.concurrent.Future;
  */
 
 public interface MainActivityContract {
+
   public static final File PATH = Environment.getExternalStorageDirectory().getAbsoluteFile();
-  public static final int numberDivided = 10000;
-  public static final String linkUrl = "http://speedtest.ftp.otenet.gr/files/test100Mb.db";
+  public static final int numberDivided = 100;
+  public static final String linkUrl = "http://speedtest.ftp.otenet.gr/files/test10Mb.db";
 
 
   interface View {
+
     void setPresenter(MainActivityContract.Presenter presenter);
+
     String getResumeButtonText();
+
     void changeText();
+
     void resumeButtonPress();
+
     void pauseButtonPress();
+
     void cancelButtonPress();
+
     void updateProgressBar(int percentage);
 
   }
 
   interface Presenter {
+
     void cancelButtonSet();
-    void resumeOrPauseButtonSet();
-    void startDownloading();
+
+    void resumeOrPauseButtonSet(boolean isPause);
+
+    void startDownloading1();
+
     void loadToFile(List<Future<ThreadFile>> list);
+
+    void startDownloading2();
+
+    void startDownloading3();
   }
 
   interface ThreadCallback {
-    void callback(int size);
+
+    void callback(long size);
   }
 }

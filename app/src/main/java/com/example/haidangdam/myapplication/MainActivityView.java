@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import com.example.mylibrary.SaveData;
 
 /**
  * Created by haidangdam on 6/7/17.
@@ -23,6 +26,11 @@ public class MainActivityView extends Fragment implements MainActivityContract.V
   ProgressBar progressBar;
   Button cancelButton;
   Button pauseOrResumeButton;
+  Button showTextButton;
+  EditText inputString;
+  EditText inputNumber;
+  TextView outputString;
+  boolean pause = true;
 
 
   public MainActivityView() {}
@@ -46,8 +54,13 @@ public class MainActivityView extends Fragment implements MainActivityContract.V
     progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
     cancelButton = (Button) view.findViewById(R.id.cancel_button);
     pauseOrResumeButton = (Button) view.findViewById(R.id.resume_button);
+    showTextButton = (Button) view.findViewById(R.id.get_string_button);
+    outputString = (TextView) view.findViewById(R.id.text_view_show_text);
+    inputString = (EditText) view.findViewById(R.id.edit_text);
+    inputNumber = (EditText) view.findViewById(R.id.edit_text_num);
     cancelButton.setOnClickListener(this);
     pauseOrResumeButton.setOnClickListener(this);
+    SaveData saveDat = SaveData.newInstance();
     return view;
   }
 
@@ -60,7 +73,7 @@ public class MainActivityView extends Fragment implements MainActivityContract.V
       @Override
       public void run() {
         if (presenter != null) {
-          presenter.startDownloading();
+          presenter.startDownloading2();
         }
       }
     }, 0);
@@ -79,8 +92,10 @@ public class MainActivityView extends Fragment implements MainActivityContract.V
         presenter.cancelButtonSet();
       }
       case R.id.resume_button: {
-        presenter.resumeOrPauseButtonSet();
+        changeText();
+        presenter.resumeOrPauseButtonSet(pause);
       }
+      case R.id.
     }
   }
 
@@ -92,8 +107,10 @@ public class MainActivityView extends Fragment implements MainActivityContract.V
   @Override
   public void changeText() {
     if (pauseOrResumeButton.getText().toString().equals("Pause")) {
+      pause = true;
       pauseOrResumeButton.setText(R.string.resume_button);
     } else {
+      pause = false;
       pauseOrResumeButton.setText(R.string.pause_button);
     }
   }
@@ -104,7 +121,9 @@ public class MainActivityView extends Fragment implements MainActivityContract.V
   }
 
   @Override
-  public void resumeButtonPress() {}
+  public void resumeButtonPress() {
+
+  }
 
   @Override
   public void pauseButtonPress() {}

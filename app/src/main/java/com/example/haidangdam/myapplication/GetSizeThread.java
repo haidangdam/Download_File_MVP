@@ -12,12 +12,13 @@ import java.net.URL;
 public class GetSizeThread implements Runnable {
 
   MainActivityContract.ThreadCallback c;
+
   public GetSizeThread(MainActivityContract.ThreadCallback c) {
     this.c = c;
   }
 
   @Override
-  public void run () {
+  public void run() {
     HttpURLConnection connection = null;
     try {
       Log.d("GetSizeThread", "Get size thread");
@@ -25,7 +26,7 @@ public class GetSizeThread implements Runnable {
       connection = (HttpURLConnection) url.openConnection();
       connection.setRequestMethod("HEAD");
       connection.getInputStream();
-      int fileSize = connection.getContentLength();
+      long fileSize = connection.getContentLength();
       c.callback(fileSize);
       Log.d("Get Size Thread", "file size: " + fileSize);
     } catch (IOException io) {
